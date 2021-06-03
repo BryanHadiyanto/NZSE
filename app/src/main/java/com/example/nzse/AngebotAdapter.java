@@ -3,6 +3,7 @@ package com.example.nzse;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,12 +16,14 @@ public class AngebotAdapter extends RecyclerView.Adapter<AngebotAdapter.AngebotH
     private RecyclerViewClickListener listener;
 
     public static class AngebotHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public ImageView image;
         public TextView text1;
         public TextView text2;
         public TextView text3;
         
         public AngebotHolder(View itemView) {
             super(itemView);
+            image = itemView.findViewById(R.id.imageView);
             text1 = itemView.findViewById(R.id.tvNummer);
             text2 = itemView.findViewById(R.id.tvGroße);
             text3 = itemView.findViewById(R.id.tvPreis);
@@ -46,6 +49,8 @@ public class AngebotAdapter extends RecyclerView.Adapter<AngebotAdapter.AngebotH
     @Override
     public void onBindViewHolder(@NonNull AngebotHolder holder, int position) {
         AngebotItem currentItem = angebotlist.get(position);
+
+        holder.image.setImageResource(currentItem.getImage());
         holder.text1.setText(currentItem.getNummer());
         holder.text2.setText(currentItem.getGroße());
         holder.text3.setText(currentItem.getPreis());

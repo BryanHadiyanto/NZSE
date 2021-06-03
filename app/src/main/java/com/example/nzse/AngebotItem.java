@@ -5,16 +5,17 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 
 public class AngebotItem {
+    int image;
     private String nummer,große,kontaktname,kontaktnummer,etage,preis;
     //private  int etage,preis;
     public static ArrayList<AngebotItem> angebotlist = new ArrayList<>();
     AngebotItem(){
-        angebotlist.add(new AngebotItem("Nummer","\0","Große","Preis","\0","\0"));
-        angebotlist.add(new AngebotItem("A01","1","10x10","200","Test","1234"));
-        angebotlist.add(new AngebotItem("A02","1","8x8","150","Test","1234"));
-        angebotlist.add(new AngebotItem("A03","1","4x4","100","Test","1234"));
+        angebotlist.add(new AngebotItem(R.drawable.sample1,"A01","1","10x10","200","Test","1234"));
+        angebotlist.add(new AngebotItem(R.drawable.sample2,"A02","1","8x8","150","Test","1234"));
+        angebotlist.add(new AngebotItem(R.drawable.sample3,"A03","1","4x4","100","Test","1234"));
     }
-    AngebotItem(String nummer, String etage, String große, String preis, String kontaktname, String kontaknummer){
+    AngebotItem(int image,String nummer, String etage, String große, String preis, String kontaktname, String kontaknummer){
+        this.image = image;
         this.nummer = nummer;
         this.etage = etage;
         this.große = große;
@@ -22,6 +23,7 @@ public class AngebotItem {
         this.kontaktname = kontaktname;
         this.kontaktnummer = kontaknummer;
     }
+    public int getImage(){ return image; }
     public String getNummer(){
         return nummer;
     }
