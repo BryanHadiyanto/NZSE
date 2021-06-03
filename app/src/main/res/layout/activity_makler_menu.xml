@@ -23,12 +23,18 @@
         app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" /><![CDATA[
+
+    />
+
+
+
+    ]]>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAngebotlist2"
-        android:layout_width="346dp"
-        android:layout_height="550dp"
+        android:layout_width="347dp"
+        android:layout_height="512dp"
         android:layout_below="@+id/editTextSearch"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
@@ -43,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSearch2"
-        app:layout_constraintVertical_bias="0.333" />/>
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/editTextSearch2"

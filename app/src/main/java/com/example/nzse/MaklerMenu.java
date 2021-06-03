@@ -55,9 +55,15 @@ public class MaklerMenu extends AppCompatActivity {
                 //zuruck zu main ohne nochmal onCreate();
                 finish();
               }});
+        bAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openangebothinzufugen();
+            }
+        });
     }
-/*    public void openKundenMenu(){
-        Intent intent = new Intent(this,KundenMenu.class);
+    public void openangebothinzufugen(){
+        Intent intent = new Intent(this,AngebotHinzufugen.class);
         startActivity(intent);
-    }*/
+    }
 }
