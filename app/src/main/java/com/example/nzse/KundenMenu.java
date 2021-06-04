@@ -38,7 +38,7 @@ public class KundenMenu extends AppCompatActivity {
             @Override
             public void onClick(View view, int position) {
                 Intent intent = new Intent(getApplicationContext(), AngebotBuchen.class);
-                intent.putExtra("get", angebotItemArrayList.get(position).getNummer());
+                intent.putExtra("get", angebotItemArrayList.get(position).getAdress());
 //                intent.putExtra("get1", angebotItemArrayList.get(position).getEtage());
 //                intent.putExtra("get2", angebotItemArrayList.get(position).getGroße());
 //                intent.putExtra("get3", angebotItemArrayList.get(position).getPreis());
