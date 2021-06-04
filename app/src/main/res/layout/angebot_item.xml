@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="66dp"
-            android:layout_height="63dp"
+            android:layout_width="88dp"
+            android:layout_height="85dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
@@ -24,7 +24,7 @@
             android:padding="2dp" />
 
         <TextView
-            android:id="@+id/tvNummer"
+            android:id="@+id/tvAdresse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -33,22 +33,22 @@
             android:layout_marginTop="18dp"
             android:layout_toEndOf="@+id/imageView"
             android:layout_toRightOf="@+id/imageView"
-            android:text="Nummer"
+            android:text="Adresse"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvGroße"
+            android:id="@+id/tvOrt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginStart="36dp"
             android:layout_marginLeft="36dp"
-            android:layout_marginTop="14dp"
-            android:layout_toEndOf="@+id/tvNummer"
-            android:layout_toRightOf="@+id/tvNummer"
-            android:text="Große"
+            android:layout_marginTop="19dp"
+            android:layout_toEndOf="@+id/tvAdresse"
+            android:layout_toRightOf="@+id/tvAdresse"
+            android:text="Ort"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -59,9 +59,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="39dp"
             android:layout_marginLeft="39dp"
-            android:layout_marginTop="14dp"
-            android:layout_toEndOf="@+id/tvGroße"
-            android:layout_toRightOf="@+id/tvGroße"
+            android:layout_marginTop="19dp"
+            android:layout_toEndOf="@+id/tvOrt"
+            android:layout_toRightOf="@+id/tvOrt"
             android:text="Preis"
             android:textColor="@color/black"
             android:textSize="20sp" />

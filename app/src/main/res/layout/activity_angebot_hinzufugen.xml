@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/editTextFloor"
+        android:id="@+id/editTextOrt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -39,10 +39,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextAdresse" />
 
     <EditText
-        android:id="@+id/editTextSize"
+        android:id="@+id/editTextPlatz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -51,7 +51,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextFloor" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextOrt" />
 
     <EditText
         android:id="@+id/editTextKontaktPhone"
@@ -66,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextKontakName" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/editTextAdresse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -87,7 +87,7 @@
         android:ems="10"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSize" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPlatz" />
 
     <TextView
         android:id="@+id/textView5"
@@ -96,7 +96,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="104dp"
-        android:text="Platznummer"
+        android:text="Adresse"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -107,7 +107,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
-        android:text="Etage"
+        android:text="Ort"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -118,7 +118,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
-        android:text="Große"
+        android:text="Platz"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 

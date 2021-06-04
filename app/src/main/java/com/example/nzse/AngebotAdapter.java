@@ -24,8 +24,8 @@ public class AngebotAdapter extends RecyclerView.Adapter<AngebotAdapter.AngebotH
         public AngebotHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.imageView);
-            text1 = itemView.findViewById(R.id.tvNummer);
-            text2 = itemView.findViewById(R.id.tvGroße);
+            text1 = itemView.findViewById(R.id.tvAdresse);
+            text2 = itemView.findViewById(R.id.tvOrt);
             text3 = itemView.findViewById(R.id.tvPreis);
             itemView.setOnClickListener(this);
         }
@@ -51,8 +51,8 @@ public class AngebotAdapter extends RecyclerView.Adapter<AngebotAdapter.AngebotH
         AngebotItem currentItem = angebotlist.get(position);
 
         holder.image.setImageResource(currentItem.getImage());
-        holder.text1.setText(currentItem.getNummer());
-        holder.text2.setText(currentItem.getGroße());
+        holder.text1.setText(currentItem.getAdress());
+        holder.text2.setText(currentItem.getOrt());
         holder.text3.setText(currentItem.getPreis());
     }
 

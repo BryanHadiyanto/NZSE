@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/TextViewFloor1"
+        android:id="@+id/TextViewOrt1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -37,10 +37,10 @@
         android:layout_marginRight="36dp"
         android:ems="10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextViewNumber1" />
+        app:layout_constraintTop_toBottomOf="@+id/TextViewAdresse" />
 
     <TextView
-        android:id="@+id/TextViewtSize1"
+        android:id="@+id/TextViewPlatz1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -48,7 +48,7 @@
         android:layout_marginRight="36dp"
         android:ems="10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextViewFloor1" />
+        app:layout_constraintTop_toBottomOf="@+id/TextViewOrt1" />
 
     <TextView
         android:id="@+id/TextViewKontaktPhone1"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/TextViewKontakName1" />
 
     <TextView
-        android:id="@+id/TextViewNumber1"
+        android:id="@+id/TextViewAdresse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -81,7 +81,7 @@
         android:layout_marginRight="36dp"
         android:ems="10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextViewtSize1" />
+        app:layout_constraintTop_toBottomOf="@+id/TextViewPlatz1" />
 
     <TextView
         android:id="@+id/textView5"
@@ -90,7 +90,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="104dp"
-        android:text="Platznummer"
+        android:text="Adresse"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -101,7 +101,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
-        android:text="Etage"
+        android:text="Ort"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -112,7 +112,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
-        android:text="Große"
+        android:text="Platz"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
