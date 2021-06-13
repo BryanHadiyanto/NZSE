@@ -21,42 +21,34 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class KundenMenu extends AppCompatActivity {
-
     private EditText etSearch;
     private RecyclerView rvAngebot;
-    private RecyclerView.Adapter adapter;
+    private AngebotAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private AngebotAdapter.RecyclerViewClickListener listener;
     private TextView tvSwitch;
-    Toolbar toolbar;
-
+    private Toolbar toolbar;
+    int count = 0;
+    ArrayList<AngebotItem> angebotItemArrayList = AngebotItem.angebotlist;;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kunden_menu);
-//        AngebotItem angebotItem = new AngebotItem();
-        ArrayList<AngebotItem> angebotItemArrayList = AngebotItem.angebotlist;
         //recyclerview
         rvAngebot = findViewById(R.id.rvAngebotlist);
         //recyclerview Clicked
         rvAngebot.setHasFixedSize(true);
-        listener = new AngebotAdapter.RecyclerViewClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                Intent intent = new Intent(getApplicationContext(), AngebotBuchen.class);
-                intent.putExtra("get", angebotItemArrayList.get(position).getAdress());
-//                intent.putExtra("get1", angebotItemArrayList.get(position).getEtage());
-//                intent.putExtra("get2", angebotItemArrayList.get(position).getGroße());
-//                intent.putExtra("get3", angebotItemArrayList.get(position).getPreis());
-//                intent.putExtra("get4", angebotItemArrayList.get(position).getKontaktname());
-//                intent.putExtra("get5", angebotItemArrayList.get(position).getKontaktnummer());
-                startActivity(intent);
-            }
-        };
         layoutManager = new LinearLayoutManager(this);
-        adapter = new AngebotAdapter(angebotItemArrayList,listener);
+        adapter = new AngebotAdapter(angebotItemArrayList);
         rvAngebot.setLayoutManager(layoutManager);
         rvAngebot.setAdapter(adapter);
+        adapter.setonClickListener(new AngebotAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(getApplicationContext(),AngebotBuchen.class);
+                count = position;
+                startActivity(intent);
+            }
+        });
 
         etSearch = findViewById(R.id.editTextSearch);
         tvSwitch = findViewById(R.id.textViewSwitch);
@@ -65,17 +57,12 @@ public class KundenMenu extends AppCompatActivity {
 
         tvSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
-            //zuruck zu main ohne nochmal onCreate();
             public void onClick(View view) {
                 finish();
             }
         });
     }
 
-/*    public void openMaklerMenu() {
-        Intent intent = new Intent(this, MaklerMenu.class);
-        startActivity(intent);
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

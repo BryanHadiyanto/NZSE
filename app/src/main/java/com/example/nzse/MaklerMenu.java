@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,37 +19,37 @@ import androidx.appcompat.widget.Toolbar;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.insert_dialogInterface{
-    EditText etSearch;
-    TextView tvSwitch;
-    Toolbar toolbar1;
-    RecyclerView rvAngebot;
-    RecyclerView.Adapter adapter;
-    RecyclerView.LayoutManager layoutManager;
-    AngebotAdapter.RecyclerViewClickListener listener;
+public class MaklerMenu<go> extends AppCompatActivity implements AngebotHinzufugen.insert_dialogInterface{
+    private EditText etSearch;
+    private TextView tvSwitch;
+    private Toolbar toolbar1;
+    private RecyclerView rvAngebot;
+    private AngebotAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
     AngebotItem angebotItem = new AngebotItem();
     ArrayList<AngebotItem> angebotItemArrayList = angebotItem.angebotlist;
 
+    int count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_makler_menu);
-
+        angebotItem.Example();
         //recycelerview
         rvAngebot= findViewById(R.id.rvAngebotlist2);
         rvAngebot.setHasFixedSize(true);
-        listener = new AngebotAdapter.RecyclerViewClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                Intent intent = new Intent(getApplicationContext(), AngebotLoschen.class);
-                intent.putExtra("angebot", (Serializable) angebotItemArrayList.get(position));
-                startActivity(intent);
-            }
-        };
         layoutManager = new LinearLayoutManager(this);
-        adapter = new AngebotAdapter(angebotItemArrayList,listener);
+        adapter = new AngebotAdapter(angebotItemArrayList);
         rvAngebot.setLayoutManager(layoutManager);
         rvAngebot.setAdapter(adapter);
+        adapter.setonClickListener(new AngebotAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(getApplicationContext(), AngebotLoschen.class);
+                count = position;
+                startActivity(intent);
+            }
+        });
 
         toolbar1 = findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar1);
@@ -64,6 +65,7 @@ public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.i
         Intent intent = new Intent(this, KundenMenu.class);
         startActivity(intent);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();

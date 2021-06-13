@@ -13,36 +13,48 @@ import java.util.ArrayList;
 
 public class AngebotAdapter extends RecyclerView.Adapter<AngebotAdapter.AngebotHolder>{
     private ArrayList<AngebotItem> angebotlist;
-    private RecyclerViewClickListener listener;
+    private OnItemClickListener listener;
 
-    public static class AngebotHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public interface  OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setonClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
+
+    public static class AngebotHolder extends RecyclerView.ViewHolder{
         public ImageView image;
         public TextView text1;
         public TextView text2;
         public TextView text3;
         
-        public AngebotHolder(View itemView) {
+        public AngebotHolder(View itemView,final OnItemClickListener listener) {
             super(itemView);
             image = itemView.findViewById(R.id.imageView);
             text1 = itemView.findViewById(R.id.tvAdresse);
             text2 = itemView.findViewById(R.id.tvOrt);
             text3 = itemView.findViewById(R.id.tvPreis);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
-    public AngebotAdapter(ArrayList<AngebotItem>angebotlist,RecyclerViewClickListener listener){
+    public AngebotAdapter(ArrayList<AngebotItem>angebotlist){
         this.angebotlist = angebotlist;
-        this.listener = listener;
     }
     @Override
     public AngebotHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.angebot_item, parent,false);
-        AngebotHolder angebotHolder = new AngebotHolder(view);
+        AngebotHolder angebotHolder = new AngebotHolder(view, listener);
         return angebotHolder;
     }
 
@@ -59,9 +71,5 @@ public class AngebotAdapter extends RecyclerView.Adapter<AngebotAdapter.AngebotH
     @Override
     public int getItemCount() {
         return angebotlist.size();
-    }
-
-    public interface RecyclerViewClickListener{
-        void onClick(View view,int position);
     }
 }

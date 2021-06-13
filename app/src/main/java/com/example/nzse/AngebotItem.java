@@ -2,18 +2,16 @@ package com.example.nzse;
 
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AngebotItem {
+public class AngebotItem{
     int image;
     private String url,ort,adress,kontaktname,kontaktnummer,platz,preis;
     //private  int etage,preis;
     public static ArrayList<AngebotItem> angebotlist = new ArrayList<>();
-    AngebotItem(){
-        angebotlist.add(new AngebotItem(R.drawable.sample1,"Berliner-alle 1","Darmstadt","64283","200","Test","1234"));
-        angebotlist.add(new AngebotItem(R.drawable.sample2,"Kasinostrasse 1","Darmstadt","64289","150","Test","1234"));
-        angebotlist.add(new AngebotItem(R.drawable.sample3,"Rhonring 1","Darmstadt","64289","100","Test","1234"));
-    }
+    AngebotItem(){};
+
     AngebotItem(int image,String adress, String ort, String platz, String preis, String kontaktname, String kontaknummer){
         this.image = image;
         this.adress = adress;
@@ -23,6 +21,14 @@ public class AngebotItem {
         this.kontaktname = kontaktname;
         this.kontaktnummer = kontaknummer;
     }
+    public void Example(){
+        angebotlist.add(new AngebotItem(R.drawable.sample1,"Berliner-alle 1","Darmstadt","64283","200","Test","1234"));
+        angebotlist.add(new AngebotItem(R.drawable.sample2,"Kasinostrasse 1","Darmstadt","64289","150","Test","1234"));
+        angebotlist.add(new AngebotItem(R.drawable.sample3,"Rhonring 1","Darmstadt","64289","100","Test","1234"));
+    }
+/*    public void changeText1(String text){
+        this.preis = text;
+    }*/
 /*    AngebotItem(String urlImage,String adress, String ort, String platz, String preis, String kontaktname, String kontaknummer){
         this.url = urlImage;
         this.adress = adress;
