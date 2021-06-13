@@ -1,34 +1,38 @@
 package com.example.nzse;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-public class MaklerMenu extends AppCompatActivity {
+public class MaklerMenu extends AppCompatActivity implements Angebot_Hinzufugen.insert_dialogInterface{
     EditText etSearch;
     TextView tvSwitch;
-    Button bAdd;
-    private RecyclerView rvAngebot;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private AngebotAdapter.RecyclerViewClickListener listener;
+    Toolbar toolbar1;
+    RecyclerView rvAngebot;
+    RecyclerView.Adapter adapter;
+    RecyclerView.LayoutManager layoutManager;
+    AngebotAdapter.RecyclerViewClickListener listener;
+    ArrayList<AngebotItem> angebotItemArrayList = AngebotItem.angebotlist;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_makler_menu);
-        ArrayList<AngebotItem> angebotItemArrayList = AngebotItem.angebotlist;
+
         //recycelerview
         rvAngebot= findViewById(R.id.rvAngebotlist2);
         rvAngebot.setHasFixedSize(true);
@@ -45,25 +49,38 @@ public class MaklerMenu extends AppCompatActivity {
         rvAngebot.setLayoutManager(layoutManager);
         rvAngebot.setAdapter(adapter);
 
+        toolbar1 = findViewById(R.id.toolbar1);
+        setSupportActionBar(toolbar1);
         etSearch= findViewById(R.id.editTextSearch2);
         tvSwitch= findViewById(R.id.textViewSwitch2);
-        bAdd = findViewById(R.id.buttonHinzufugen);
-
         tvSwitch.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 //zuruck zu main ohne nochmal onCreate();
                 finish();
               }});
-        bAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openangebothinzufugen();
-            }
-        });
     }
-    public void openangebothinzufugen(){
-        Intent intent = new Intent(this,AngebotHinzufugen.class);
-        startActivity(intent);
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.item_menu_makler,menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+        switch (item.getItemId()){
+            case R.id.iconInsert: {
+                Angebot_Hinzufugen dialog = new Angebot_Hinzufugen();
+                dialog.show(getSupportFragmentManager(), "Insert Item");
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void applyTexts(String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer, Integer position) {
+        angebotItemArrayList.add(position,new AngebotItem(R.drawable.sample1,addresse,ort,platz,preis,kontakname,kontaknummer));
+        adapter.notifyItemInserted(position);
     }
 }

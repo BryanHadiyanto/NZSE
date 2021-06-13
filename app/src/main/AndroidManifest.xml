@@ -13,7 +13,6 @@
         <activity android:name=".AngebotBuchen" />
         <activity android:name=".gebuchteListe" />
         <activity android:name=".AngebotLoschen" />
-        <activity android:name=".AngebotHinzufugen" />
         <activity android:name=".MaklerMenu" />
         <activity android:name=".KundenMenu">
             <intent-filter>

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class AngebotItem {
     int image;
-    private String ort,adress,kontaktname,kontaktnummer,platz,preis;
+    private String url,ort,adress,kontaktname,kontaktnummer,platz,preis;
     //private  int etage,preis;
     public static ArrayList<AngebotItem> angebotlist = new ArrayList<>();
     AngebotItem(){
@@ -23,7 +23,17 @@ public class AngebotItem {
         this.kontaktname = kontaktname;
         this.kontaktnummer = kontaknummer;
     }
+/*    AngebotItem(String urlImage,String adress, String ort, String platz, String preis, String kontaktname, String kontaknummer){
+        this.url = urlImage;
+        this.adress = adress;
+        this.ort = ort;
+        this.platz = platz;
+        this.preis = preis;
+        this.kontaktname = kontaktname;
+        this.kontaktnummer = kontaknummer;
+    }*/
     public int getImage(){ return image; }
+//    public String getUrl(){ return url};
     public String getAdress(){
         return adress;
     }
