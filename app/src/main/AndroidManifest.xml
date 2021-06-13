@@ -13,14 +13,14 @@
         <activity android:name=".AngebotBuchen" />
         <activity android:name=".gebuchteListe" />
         <activity android:name=".AngebotLoschen" />
-        <activity android:name=".MaklerMenu" />
-        <activity android:name=".KundenMenu">
-            <intent-filter>
+        <activity android:name=".MaklerMenu" >
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".KundenMenu"/>
+
     </application>
 
 </manifest>

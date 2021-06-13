@@ -14,9 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-public class Angebot_Hinzufugen extends AppCompatDialogFragment {
+public class AngebotHinzufugen extends AppCompatDialogFragment {
     insert_dialogInterface insert_dialogInterface;
-    ImageView ivImage;
+
     EditText etAdress,etOrt,etPlatz,etPreis,etKontakName,etKontakNummer;
     @NonNull
     @Override
@@ -29,7 +29,7 @@ public class Angebot_Hinzufugen extends AppCompatDialogFragment {
                 .setNegativeButton("Hinzufugen", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
-//                Integer image =  ivImage.getImageAlpha();
+
                 String addresse = etAdress.getText().toString();
                 String ort = etOrt.getText().toString();
                 String platz = etPlatz.getText().toString();

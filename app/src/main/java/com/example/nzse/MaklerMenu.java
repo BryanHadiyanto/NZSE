@@ -13,12 +13,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MaklerMenu extends AppCompatActivity implements Angebot_Hinzufugen.insert_dialogInterface{
+public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.insert_dialogInterface{
     EditText etSearch;
     TextView tvSwitch;
     Toolbar toolbar1;
@@ -26,7 +26,8 @@ public class MaklerMenu extends AppCompatActivity implements Angebot_Hinzufugen.
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
     AngebotAdapter.RecyclerViewClickListener listener;
-    ArrayList<AngebotItem> angebotItemArrayList = AngebotItem.angebotlist;
+    AngebotItem angebotItem = new AngebotItem();
+    ArrayList<AngebotItem> angebotItemArrayList = angebotItem.angebotlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +57,13 @@ public class MaklerMenu extends AppCompatActivity implements Angebot_Hinzufugen.
         tvSwitch.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                //zuruck zu main ohne nochmal onCreate();
-                finish();
+                openKundenMenu();
               }});
     }
-
+    public void openKundenMenu() {
+        Intent intent = new Intent(this, KundenMenu.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -71,7 +74,7 @@ public class MaklerMenu extends AppCompatActivity implements Angebot_Hinzufugen.
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         switch (item.getItemId()){
             case R.id.iconInsert: {
-                Angebot_Hinzufugen dialog = new Angebot_Hinzufugen();
+                AngebotHinzufugen dialog = new AngebotHinzufugen();
                 dialog.show(getSupportFragmentManager(), "Insert Item");
             }
         }

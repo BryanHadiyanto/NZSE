@@ -34,8 +34,8 @@ public class KundenMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kunden_menu);
-        AngebotItem angebotItem = new AngebotItem();
-        ArrayList<AngebotItem> angebotItemArrayList = angebotItem.angebotlist;
+//        AngebotItem angebotItem = new AngebotItem();
+        ArrayList<AngebotItem> angebotItemArrayList = AngebotItem.angebotlist;
         //recyclerview
         rvAngebot = findViewById(R.id.rvAngebotlist);
         //recyclerview Clicked
@@ -65,16 +65,17 @@ public class KundenMenu extends AppCompatActivity {
 
         tvSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
+            //zuruck zu main ohne nochmal onCreate();
             public void onClick(View view) {
-                openMaklerMenu();
+                finish();
             }
         });
     }
 
-    public void openMaklerMenu() {
+/*    public void openMaklerMenu() {
         Intent intent = new Intent(this, MaklerMenu.class);
         startActivity(intent);
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

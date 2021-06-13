@@ -6,20 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".AngebotHinzufugen">
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="302dp"
-        android:layout_height="155dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="52dp"
-        android:layout_marginLeft="52dp"
-        android:layout_marginTop="12dp"
-        android:padding="2dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
@@ -82,7 +68,7 @@
         android:inputType="textPersonName"
         android:text="Adresse"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView1" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
         android:id="@+id/editTextPreis"
@@ -109,4 +95,5 @@
         android:text="Kontakt Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPreis" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
