@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,20 +15,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
-import java.io.Serializable;
+
 import java.util.ArrayList;
 
-public class MaklerMenu<go> extends AppCompatActivity implements AngebotHinzufugen.insert_dialogInterface{
+public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.insert_dialogInterface, AngebotLoschen.delete_dialogInterface{
     private EditText etSearch;
     private TextView tvSwitch;
     private Toolbar toolbar1;
     private RecyclerView rvAngebot;
-    private AngebotAdapter adapter;
+    AngebotAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     AngebotItem angebotItem = new AngebotItem();
     ArrayList<AngebotItem> angebotItemArrayList = angebotItem.angebotlist;
+    public static int count;
 
-    int count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +36,7 @@ public class MaklerMenu<go> extends AppCompatActivity implements AngebotHinzufug
         angebotItem.Example();
         //recycelerview
         rvAngebot= findViewById(R.id.rvAngebotlist2);
-        rvAngebot.setHasFixedSize(true);
+        //rvAngebot.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         adapter = new AngebotAdapter(angebotItemArrayList);
         rvAngebot.setLayoutManager(layoutManager);
@@ -45,9 +44,9 @@ public class MaklerMenu<go> extends AppCompatActivity implements AngebotHinzufug
         adapter.setonClickListener(new AngebotAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(getApplicationContext(), AngebotLoschen.class);
                 count = position;
-                startActivity(intent);
+                AngebotLoschen dialog = new AngebotLoschen();
+                dialog.show(getSupportFragmentManager(), "Delete Item");
             }
         });
 
@@ -72,6 +71,7 @@ public class MaklerMenu<go> extends AppCompatActivity implements AngebotHinzufug
         inflater.inflate(R.menu.item_menu_makler,menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         switch (item.getItemId()){
@@ -82,10 +82,17 @@ public class MaklerMenu<go> extends AppCompatActivity implements AngebotHinzufug
         }
         return super.onOptionsItemSelected(item);
     }
-
+    //fehlt imageview
     @Override
     public void applyTexts(String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer, Integer position) {
         angebotItemArrayList.add(position,new AngebotItem(R.drawable.sample1,addresse,ort,platz,preis,kontakname,kontaknummer));
         adapter.notifyItemInserted(position);
     }
+
+    @Override
+    public void removeTexts(int position) {
+        angebotItemArrayList.remove(position);
+        adapter.notifyItemRemoved(position);
+    }
+
 }

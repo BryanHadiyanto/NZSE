@@ -20,22 +20,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class KundenMenu extends AppCompatActivity {
+public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buchen_dialogInterface{
     private EditText etSearch;
     private RecyclerView rvAngebot;
-    private AngebotAdapter adapter;
+    AngebotAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private TextView tvSwitch;
     private Toolbar toolbar;
-    int count = 0;
-    ArrayList<AngebotItem> angebotItemArrayList = AngebotItem.angebotlist;;
+    public static int count;
+//    ArrayList<AngebotItem> angebotItemArrayList = AngebotItem.angebotlist;
+    AngebotItem angebotItem = new AngebotItem();
+    ArrayList<AngebotItem> angebotItemArrayList = angebotItem.angebotlist;
+    BookedItem bookedItem = new BookedItem();
+    ArrayList<BookedItem> bookedItemArrayList = bookedItem.bookedlist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kunden_menu);
         //recyclerview
         rvAngebot = findViewById(R.id.rvAngebotlist);
-        //recyclerview Clicked
         rvAngebot.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         adapter = new AngebotAdapter(angebotItemArrayList);
@@ -44,9 +47,11 @@ public class KundenMenu extends AppCompatActivity {
         adapter.setonClickListener(new AngebotAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(getApplicationContext(),AngebotBuchen.class);
+                System.out.println("COUNT: "+ count +" POSITION: "+ position);
                 count = position;
-                startActivity(intent);
+                System.out.println("COUNT: "+ count +" POSITION: "+ position);
+                AngebotBuchen dialog = new AngebotBuchen();
+                dialog.show(getSupportFragmentManager(), "Booking");
             }
         });
 
@@ -63,7 +68,6 @@ public class KundenMenu extends AppCompatActivity {
         });
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -79,5 +83,11 @@ public class KundenMenu extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void applyTexts(String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer, Integer position) {
+        bookedItemArrayList.add(position,new BookedItem(R.drawable.sample1,addresse,ort,platz,preis,kontakname,kontaknummer));
+//        adapter.notifyItemInserted(position);
     }
 }

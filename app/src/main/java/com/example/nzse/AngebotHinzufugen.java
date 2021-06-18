@@ -26,23 +26,21 @@ public class AngebotHinzufugen extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.activity_angebot_hinzufugen,null);
         builder.setView(view)
                 .setTitle("Insert Item")
-                .setNegativeButton("Hinzufugen", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
 
+            }
+        }).setPositiveButton("Hinzufugen", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
                 String addresse = etAdress.getText().toString();
                 String ort = etOrt.getText().toString();
                 String platz = etPlatz.getText().toString();
                 String preis = etPreis.getText().toString();
                 String kontakname = etKontakName.getText().toString();
                 String kontaknummer = etKontakNummer.getText().toString();
-                int pos = 0;
                 insert_dialogInterface.applyTexts(addresse,ort,platz,preis,kontakname,kontaknummer,0);
-            }
-        }).setPositiveButton("Abbrechen", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-
             }
         });
         etAdress= view.findViewById(R.id.editTextAdresse);
