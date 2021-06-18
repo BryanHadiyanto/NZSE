@@ -42,7 +42,7 @@ public class AngebotLoschen extends AppCompatActivity {
         imageView1.setImageResource(angebotItem.angebotlist.get(maklerMenu.count).getImage());
         etAdress1.setText(angebotItem.angebotlist.get(maklerMenu.count).getAdress());
         etOrt1.setText(angebotItem.angebotlist.get(maklerMenu.count).getOrt());
-        etPlatz1.setText(angebotItem.angebotlist.get(maklerMenu.count).getPlatz());
+        etPlatz1.setText(Integer.toString(angebotItem.angebotlist.get(maklerMenu.count).getPlatz()));
         etPreis1.setText(angebotItem.angebotlist.get(maklerMenu.count).getPreis());
         etKontakName1.setText(angebotItem.angebotlist.get(maklerMenu.count).getKontaktname());
         etKontakNummer1.setText(angebotItem.angebotlist.get(maklerMenu.count).getKontaktnummer());

@@ -27,7 +27,7 @@
         android:layout_marginRight="100dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Ort"
+        android:hint="Ort"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextAdresse" />
 
@@ -40,7 +40,7 @@
         android:layout_marginRight="100dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Platz"
+        android:hint="Platz"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextOrt" />
 
@@ -53,7 +53,7 @@
         android:layout_marginRight="100dp"
         android:ems="10"
         android:inputType="phone"
-        android:text="Kontakt Nummer"
+        android:hint="Kontakt Nummer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextKontakName" />
 
@@ -66,7 +66,7 @@
         android:layout_marginRight="100dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Adresse"
+        android:hint="Adresse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -79,7 +79,7 @@
         android:layout_marginRight="100dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:text="Preis"
+        android:hint="Preis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPlatz" />
 
@@ -92,7 +92,7 @@
         android:layout_marginRight="100dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Kontakt Name"
+        android:hint="Kontakt Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPreis" />
 
