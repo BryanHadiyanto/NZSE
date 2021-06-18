@@ -11,13 +11,14 @@
         android:theme="@style/Theme.NZSE">
         <activity android:name=".Angebotabsagen"></activity>
         <activity android:name=".gebuchteListe" />
-        <activity android:name=".MaklerMenu" />
-        <activity android:name=".KundenMenu">
+        <activity android:name=".MaklerMenu" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".KundenMenu"/>
+
 
     </application>
 

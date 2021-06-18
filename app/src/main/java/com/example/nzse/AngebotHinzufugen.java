@@ -58,6 +58,6 @@ public class AngebotHinzufugen extends AppCompatDialogFragment {
     }
 
     public interface insert_dialogInterface{
-        public void applyTexts( String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer,Integer position);
+        public void applyTexts( String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer,int position);
     }
 }

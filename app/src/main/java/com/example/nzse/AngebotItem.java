@@ -6,16 +6,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class AngebotItem{
-    private int image, anzahlplaetze;
+    private int image;
+    private int anzahlplaetze;
     private String url,ort,adress,kontaktname,kontaktnummer,preis;
+//    private String  anzahlplaetze;
     private int id;
     static int x = 0;
-    //private  int etage,preis;
     public static ArrayList<AngebotItem> angebotlist = new ArrayList<>();
 
-    AngebotItem(){
-
-    };
+    AngebotItem(){ }
 
     AngebotItem(int image,String adress, String ort, String anzahlplaetze, String preis, String kontaktname, String kontaknummer){
         this.x++;
@@ -30,12 +29,10 @@ public class AngebotItem{
     }
        public void Example(){
           angebotlist.add(new AngebotItem(R.drawable.sample1,"Berliner-alle 1","Darmstadt","4","200","Test","1234"));
-        //  angebotlist.add(new AngebotItem(R.drawable.sample2,"Kasinostrasse 1","Darmstadt","64289","150","Test","1234"));
-      //    angebotlist.add(new AngebotItem(R.drawable.sample3,"Rhonring 1","Darmstadt","64289","100","Test","1234"));
+          angebotlist.add(new AngebotItem(R.drawable.sample2,"Kasinostrasse 1","Darmstadt","64289","150","Test","1234"));
+          angebotlist.add(new AngebotItem(R.drawable.sample3,"Rhonring 1","Darmstadt","64289","100","Test","1234"));
    }
- /* /*    public void changeText1(String text){
-          this.preis = text;
-      }*/
+
 /*    AngebotItem(String urlImage,String adress, String ort, String platz, String preis, String kontaktname, String kontaknummer){
         this.url = urlImage;
         this.adress = adress;

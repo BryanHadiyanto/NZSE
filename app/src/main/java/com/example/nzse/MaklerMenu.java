@@ -36,7 +36,7 @@ public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.i
         angebotItem.Example();
         //recycelerview
         rvAngebot= findViewById(R.id.rvAngebotlist2);
-        //rvAngebot.setHasFixedSize(true);
+        rvAngebot.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         adapter = new AngebotAdapter(angebotItemArrayList);
         rvAngebot.setLayoutManager(layoutManager);
@@ -63,6 +63,7 @@ public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.i
     public void openKundenMenu() {
         Intent intent = new Intent(this, KundenMenu.class);
         startActivity(intent);
+//        finish();
     }
 
     @Override
@@ -84,7 +85,7 @@ public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.i
     }
     //fehlt imageview
     @Override
-    public void applyTexts(String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer, Integer position) {
+    public void applyTexts(String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer, int position) {
         angebotItemArrayList.add(position,new AngebotItem(R.drawable.sample1,addresse,ort,platz,preis,kontakname,kontaknummer));
         adapter.notifyItemInserted(position);
     }

@@ -28,6 +28,7 @@ public class AngebotAdapter extends RecyclerView.Adapter<AngebotAdapter.AngebotH
         public TextView text1;
         public TextView text2;
         public TextView text3;
+        public TextView text4;
         
         public AngebotHolder(View itemView,final OnItemClickListener listener) {
             super(itemView);
@@ -35,6 +36,7 @@ public class AngebotAdapter extends RecyclerView.Adapter<AngebotAdapter.AngebotH
             text1 = itemView.findViewById(R.id.tvAdresse);
             text2 = itemView.findViewById(R.id.tvOrt);
             text3 = itemView.findViewById(R.id.tvPreis);
+            text4 = itemView.findViewById(R.id.tvPlatz);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -66,6 +68,7 @@ public class AngebotAdapter extends RecyclerView.Adapter<AngebotAdapter.AngebotH
         holder.text1.setText(currentItem.getAdress());
         holder.text2.setText(currentItem.getOrt());
         holder.text3.setText(currentItem.getPreis());
+        holder.text4.setText(currentItem.getPlatz());
     }
 
     @Override

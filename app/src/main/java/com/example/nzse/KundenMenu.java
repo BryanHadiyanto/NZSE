@@ -28,7 +28,6 @@ public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buche
     private TextView tvSwitch;
     private Toolbar toolbar;
     public static int count;
-//    ArrayList<AngebotItem> angebotItemArrayList = AngebotItem.angebotlist;
     AngebotItem angebotItem = new AngebotItem();
     ArrayList<AngebotItem> angebotItemArrayList = angebotItem.angebotlist;
     BookedItem bookedItem = new BookedItem();
@@ -37,6 +36,7 @@ public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buche
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kunden_menu);
+        //angebotItem.Example();
         //recyclerview
         rvAngebot = findViewById(R.id.rvAngebotlist);
         rvAngebot.setHasFixedSize(true);
@@ -47,9 +47,9 @@ public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buche
         adapter.setonClickListener(new AngebotAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                System.out.println("COUNT: "+ count +" POSITION: "+ position);
+                //System.out.println("COUNT: "+ count +" POSITION: "+ position);
                 count = position;
-                System.out.println("COUNT: "+ count +" POSITION: "+ position);
+                //System.out.println("COUNT: "+ count +" POSITION: "+ position);
                 AngebotBuchen dialog = new AngebotBuchen();
                 dialog.show(getSupportFragmentManager(), "Booking");
             }
@@ -63,11 +63,15 @@ public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buche
         tvSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                openMakler();
             }
         });
     }
-
+    public void openMakler() {
+//        Intent intent = new Intent(this, MaklerMenu.class);
+//        startActivity(intent);
+        finish();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -86,8 +90,8 @@ public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buche
     }
 
     @Override
-    public void applyTexts(String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer, Integer position) {
+    public void applyTexts(String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer, int position) {
         bookedItemArrayList.add(position,new BookedItem(R.drawable.sample1,addresse,ort,platz,preis,kontakname,kontaknummer));
-//        adapter.notifyItemInserted(position);
     }
+
 }

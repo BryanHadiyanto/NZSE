@@ -1,54 +1,82 @@
 package com.example.nzse;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-public class AngebotBuchen extends AppCompatActivity {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDialogFragment;
+
+public class AngebotBuchen extends AppCompatDialogFragment {
+    buchen_dialogInterface buchen_dialogInterface;
+
     ImageView imageView;
-    TextView tvAdress,tvOrt,tvPlatz,tvPreis,tvKontakname,tvKontaknummer, tvID;
+    EditText etAdress,etOrt,etPlatz,etPreis,etKontakname,etKontaknummer, tvID;
     String sNum,sEt,sGr,sPr,sKontnam,sKontnum;
-    Button button;
-    KundenMenu kundenMenu = new KundenMenu();
+//    Button button;
+    KundenMenu kundenMenu;
+    AngebotItem angebotItem;
 
+    @NonNull
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_angebot_buchen);
-        imageView = findViewById(R.id.imageView3);
-        tvAdress = findViewById(R.id.TextViewAdress);
-        tvOrt = findViewById(R.id.TextViewOrt);
-        tvPlatz = findViewById(R.id.TextViewtPlatz);
-        tvPreis = findViewById(R.id.TextViewPreis);
-        tvKontakname = findViewById(R.id.TextViewKontakName);
-        tvKontaknummer = findViewById(R.id.TextViewKontaktPhone);
-        tvID = findViewById(R.id.IDTextView);
-        button = findViewById(R.id.buttonBuchen);
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.activity_angebot_buchen, null);
+        builder.setView(view)
+                .setTitle("Booking")
+                .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogInterface, int which) {
 
-        tvID.setText(Integer.toString(kundenMenu.angebotItemArrayList.get(kundenMenu.count).getId()));
-        imageView.setImageResource(kundenMenu.angebotItemArrayList.get(kundenMenu.count).getImage());
-        tvAdress.setText(kundenMenu.angebotItemArrayList.get(kundenMenu.count).getAdress());
-        tvOrt.setText(kundenMenu.angebotItemArrayList.get(kundenMenu.count).getOrt());
-        tvPlatz.setText(Integer.toString(kundenMenu.angebotItemArrayList.get(kundenMenu.count).getPlatz()));
-        tvPreis.setText(kundenMenu.angebotItemArrayList.get(kundenMenu.count).getPreis());
-        tvKontakname.setText(kundenMenu.angebotItemArrayList.get(kundenMenu.count).getKontaktname());
-        tvKontaknummer.setText(kundenMenu.angebotItemArrayList.get(kundenMenu.count).getKontaktnummer());
+                    }
+                }).setPositiveButton("Buchen", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                String addresse = etAdress.getText().toString();
+                String ort = etOrt.getText().toString();
+                String platz = etPlatz.getText().toString();
+                String preis = etPreis.getText().toString();
+                String kontakname = etKontakname.getText().toString();
+                String kontaknummer = etKontaknummer.getText().toString();
+                buchen_dialogInterface.applyTexts(addresse, ort, platz, preis, kontakname, kontaknummer, 0);
+            }
+        });
 
-        tvID.setEnabled(false);
-        tvAdress.setEnabled(false);
-        tvOrt.setEnabled(false);
-        tvPlatz.setEnabled(false);
-        tvPreis.setEnabled(false);
-        tvKontakname.setEnabled(false);
-        tvKontaknummer.setEnabled(false);
+        imageView = view.findViewById(R.id.imageView3);
+        etAdress = view.findViewById(R.id.EditTextAdress);
+        etOrt = view.findViewById(R.id.EditTextOrt);
+        etPlatz = view.findViewById(R.id.EditTextPlatz);
+        etPreis = view.findViewById(R.id.EditTextPreis);
+        etKontakname = view.findViewById(R.id.EditTextKontakName);
+        etKontaknummer = view.findViewById(R.id.EditTextKontaktPhone);
+        tvID = view.findViewById(R.id.EditTextID);
+        //button = view.findViewById(R.id.buttonBuchen);
 
-        this.button.setOnClickListener(new View.OnClickListener() {
+        tvID.setText(Integer.toString(angebotItem.angebotlist.get(kundenMenu.count).getId()));
+        imageView.setImageResource(angebotItem.angebotlist.get(kundenMenu.count).getImage());
+        etAdress.setText(angebotItem.angebotlist.get(kundenMenu.count).getAdress());
+        etOrt.setText(angebotItem.angebotlist.get(kundenMenu.count).getOrt());
+        etPlatz.setText(Integer.toString(angebotItem.angebotlist.get(kundenMenu.count).getPlatz()));
+        etPreis.setText(angebotItem.angebotlist.get(kundenMenu.count).getPreis());
+        etKontakname.setText(angebotItem.angebotlist.get(kundenMenu.count).getKontaktname());
+        etKontaknummer.setText(angebotItem.angebotlist.get(kundenMenu.count).getKontaktnummer());
+
+        //tvID.setEnabled(false);
+        etAdress.setEnabled(false);
+        etOrt.setEnabled(false);
+        etPlatz.setEnabled(false);
+        etPreis.setEnabled(false);
+        etKontakname.setEnabled(false);
+        etKontaknummer.setEnabled(false);
+
+/*        this.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                     int id = Integer.parseInt(tvID.getText().toString());
@@ -68,8 +96,15 @@ public class AngebotBuchen extends AppCompatActivity {
                         }
                     }
             }
-        });
+        });*/
+        return builder.create();
     }
-
-
+    @Override
+    public void onAttach(@NonNull Context context){
+        buchen_dialogInterface = (buchen_dialogInterface) context;
+        super.onAttach(context);
+    }
+    public interface buchen_dialogInterface {
+        public void applyTexts( String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer,int position);
+    }
 }
