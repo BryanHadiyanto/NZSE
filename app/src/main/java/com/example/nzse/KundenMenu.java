@@ -2,6 +2,8 @@ package com.example.nzse;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -56,6 +58,22 @@ public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buche
         });
 
         etSearch = findViewById(R.id.editTextSearch);
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filter(editable.toString());
+            }
+        });
         tvSwitch = findViewById(R.id.textViewSwitch);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -94,4 +112,14 @@ public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buche
         bookedItemArrayList.add(position,new BookedItem(R.drawable.sample1,addresse,ort,platz,preis,kontakname,kontaknummer));
     }
 
+    private void filter(String text){
+        ArrayList<AngebotItem> filteredList = new ArrayList<>();
+        for(AngebotItem item : angebotItemArrayList){
+            if(item.getOrt().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+
+        adapter.filterList(filteredList);
+    }
 }

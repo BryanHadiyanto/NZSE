@@ -68,11 +68,16 @@ public class AngebotAdapter extends RecyclerView.Adapter<AngebotAdapter.AngebotH
         holder.text1.setText(currentItem.getAdress());
         holder.text2.setText(currentItem.getOrt());
         holder.text3.setText(currentItem.getPreis());
-        holder.text4.setText(currentItem.getPlatz());
+//        holder.text4.setText(currentItem.getPlatz());
     }
 
     @Override
     public int getItemCount() {
         return angebotlist.size();
+    }
+
+    public void filterList(ArrayList<AngebotItem>filteredList){
+        angebotlist = filteredList;
+        notifyDataSetChanged();
     }
 }

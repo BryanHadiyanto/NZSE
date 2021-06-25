@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -53,6 +55,22 @@ public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.i
         toolbar1 = findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar1);
         etSearch= findViewById(R.id.editTextSearch2);
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filter(editable.toString());
+            }
+        });
         tvSwitch= findViewById(R.id.textViewSwitch2);
         tvSwitch.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -96,4 +114,14 @@ public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.i
         adapter.notifyItemRemoved(position);
     }
 
+    private void filter(String text){
+        ArrayList<AngebotItem> filteredList = new ArrayList<>();
+        for(AngebotItem item : angebotItemArrayList){
+            if(item.getOrt().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+
+        adapter.filterList(filteredList);
+    }
 }

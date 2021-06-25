@@ -27,7 +27,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="45dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="60dp"
         android:layout_marginRight="36dp"
         android:text="Ihre Angebot"
         android:textSize="18sp"
@@ -46,7 +46,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="16dp"
         android:background="@android:color/darker_gray"
         android:padding="4dp"
         android:scrollbars="vertical"
@@ -54,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSearch2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.481" />
 
     <EditText
         android:id="@+id/editTextSearch2"
