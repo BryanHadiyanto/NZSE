@@ -1,11 +1,13 @@
 package com.example.nzse;
 
+import android.graphics.Bitmap;
 import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class AngebotItem{
+    private Bitmap bitimage;
     private int image;
     private int anzahlplaetze;
     private String url,ort,adress,kontaktname,kontaktnummer,preis;
@@ -16,10 +18,10 @@ public class AngebotItem{
 
     AngebotItem(){ }
 
-    AngebotItem(int image,String adress, String ort, String anzahlplaetze, String preis, String kontaktname, String kontaknummer){
+    AngebotItem(Bitmap bitimage, String adress, String ort, String anzahlplaetze, String preis, String kontaktname, String kontaknummer){
         this.x++;
         id = x;
-        this.image = image;
+        this.bitimage = bitimage;
         this.adress = adress;
         this.ort = ort;
         this.anzahlplaetze = Integer.parseInt(anzahlplaetze);
@@ -27,21 +29,22 @@ public class AngebotItem{
         this.kontaktname = kontaktname;
         this.kontaktnummer = kontaknummer;
     }
-       public void Example(){
-          angebotlist.add(new AngebotItem(R.drawable.sample1,"Berliner-alle 1","Darmstadt","4","200","Test","1234"));
-          angebotlist.add(new AngebotItem(R.drawable.sample2,"Kasinostrasse 1","Darmstadt","64289","150","Test","1234"));
-          angebotlist.add(new AngebotItem(R.drawable.sample3,"Rhonring 1","Darmstadt","64289","100","Test","1234"));
-   }
-
-/*    AngebotItem(String urlImage,String adress, String ort, String platz, String preis, String kontaktname, String kontaknummer){
-        this.url = urlImage;
-        this.adress = adress;
-        this.ort = ort;
-        this.platz = platz;
-        this.preis = preis;
-        this.kontaktname = kontaktname;
-        this.kontaktnummer = kontaknummer;
-    }*/
+//    AngebotItem(int image, String adress, String ort, String anzahlplaetze, String preis, String kontaktname, String kontaknummer){
+//        this.x++;
+//        id = x;
+//        this.image = image;
+//        this.adress = adress;
+//        this.ort = ort;
+//        this.anzahlplaetze = Integer.parseInt(anzahlplaetze);
+//        this.preis = preis;
+//        this.kontaktname = kontaktname;
+//        this.kontaktnummer = kontaknummer;
+//    }
+//       public void Example(){
+//          angebotlist.add(new AngebotItem(R.drawable.sample1,"Berliner-alle 1","Darmstadt","4","200","Test","1234"));
+//          angebotlist.add(new AngebotItem(R.drawable.sample2,"Kasinostrasse 1","Darmstadt","64289","150","Test","1234"));
+//          angebotlist.add(new AngebotItem(R.drawable.sample3,"Rhonring 1","Darmstadt","64289","100","Test","1234"));
+//   }
 
     public int getImage() {
         return image;
@@ -59,13 +62,12 @@ public class AngebotItem{
         if(anzahlplaetze != 0)
             this.anzahlplaetze--;
     }
-
-    public String getUrl() {
-        return url;
+    public void setBitimage(Bitmap newBitimage) {
+        this.bitimage = newBitimage;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public Bitmap getBitimage() {
+        return bitimage;
     }
 
     public String getOrt() {
@@ -116,11 +118,11 @@ public class AngebotItem{
         this.id = id;
     }
 
-    public static ArrayList<AngebotItem> getAngebotlist() {
+    public ArrayList<AngebotItem> getAngebotlist() {
         return angebotlist;
     }
 
-    public static void setAngebotlist(ArrayList<AngebotItem> angebotlist) {
+    public void setAngebotlist(ArrayList<AngebotItem> angebotlist) {
         AngebotItem.angebotlist = angebotlist;
     }
 }

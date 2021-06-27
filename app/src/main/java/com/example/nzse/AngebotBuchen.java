@@ -57,7 +57,6 @@ public class AngebotBuchen extends AppCompatDialogFragment {
         etKontakname = view.findViewById(R.id.EditTextKontakName);
         etKontaknummer = view.findViewById(R.id.EditTextKontaktPhone);
         tvID = view.findViewById(R.id.EditTextID);
-        //button = view.findViewById(R.id.buttonBuchen);
 
         tvID.setText(Integer.toString(angebotItem.angebotlist.get(kundenMenu.count).getId()));
         imageView.setImageResource(angebotItem.angebotlist.get(kundenMenu.count).getImage());

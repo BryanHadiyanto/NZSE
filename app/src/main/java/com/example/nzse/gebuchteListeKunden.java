@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
-public class gebuchteListe extends AppCompatActivity {
+public class gebuchteListeKunden extends AppCompatActivity {
     private RecyclerView rvAngebot1;
     private BookedAdapter adapter1;
     private RecyclerView.LayoutManager layoutManager1;
@@ -16,7 +16,7 @@ public class gebuchteListe extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gebuchte_liste);
+        setContentView(R.layout.activity_gebuchte_liste_kunden);
         //recyclerview
         rvAngebot1 = findViewById(R.id.rvAngebotlist1);
         rvAngebot1.setHasFixedSize(true);

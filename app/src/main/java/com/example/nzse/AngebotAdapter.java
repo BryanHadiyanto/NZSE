@@ -1,5 +1,6 @@
 package com.example.nzse;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,11 +65,11 @@ public class AngebotAdapter extends RecyclerView.Adapter<AngebotAdapter.AngebotH
     public void onBindViewHolder(@NonNull AngebotHolder holder, int position) {
         AngebotItem currentItem = angebotlist.get(position);
 
-        holder.image.setImageResource(currentItem.getImage());
+        holder.image.setImageBitmap(currentItem.getBitimage());
         holder.text1.setText(currentItem.getAdress());
         holder.text2.setText(currentItem.getOrt());
-        holder.text3.setText(currentItem.getPreis());
-//        holder.text4.setText(currentItem.getPlatz());
+        holder.text3.setText(currentItem.getPreis() + " €");
+        holder.text4.setText(String.valueOf("Verfugbare Raum: "+ currentItem.getPlatz()));
     }
 
     @Override

@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buchen_dialogInterface{
     private EditText etSearch;
@@ -28,6 +29,7 @@ public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buche
     AngebotAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private TextView tvSwitch;
+    private Button bsortAdr, bsortPreis;
     private Toolbar toolbar;
     public static int count;
     AngebotItem angebotItem = new AngebotItem();
@@ -49,9 +51,7 @@ public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buche
         adapter.setonClickListener(new AngebotAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                //System.out.println("COUNT: "+ count +" POSITION: "+ position);
                 count = position;
-                //System.out.println("COUNT: "+ count +" POSITION: "+ position);
                 AngebotBuchen dialog = new AngebotBuchen();
                 dialog.show(getSupportFragmentManager(), "Booking");
             }
@@ -84,6 +84,20 @@ public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buche
                 openMakler();
             }
         });
+        bsortAdr = findViewById(R.id.buttonSortAdr);
+        bsortAdr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sortArrayListAdresse();
+            }
+        });
+        bsortPreis = findViewById(R.id.buttonSortpreis);
+        bsortPreis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sortArrayListPreis();
+            }
+        });
     }
     public void openMakler() {
 //        Intent intent = new Intent(this, MaklerMenu.class);
@@ -99,8 +113,8 @@ public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buche
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         switch (item.getItemId()){
-            case R.id.icongebuchtlist: {
-                Intent intent = new Intent(this,gebuchteListe.class);
+            case R.id.icongebuchtlistKunden: {
+                Intent intent = new Intent(this, gebuchteListeKunden.class);
                 startActivity(intent);
             }
         }
@@ -119,7 +133,24 @@ public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buche
                 filteredList.add(item);
             }
         }
-
         adapter.filterList(filteredList);
+    }
+    private void sortArrayListAdresse(){
+        Collections.sort(angebotItemArrayList, new Comparator<AngebotItem>() {
+            @Override
+            public int compare(AngebotItem item, AngebotItem t1) {
+                return item.getAdress().compareTo(t1.getAdress());
+            }
+        });
+        adapter.notifyDataSetChanged();
+    }
+    private void sortArrayListPreis(){
+        Collections.sort(angebotItemArrayList, new Comparator<AngebotItem>() {
+            @Override
+            public int compare(AngebotItem item, AngebotItem t1) {
+                return item.getPreis().compareTo(t1.getPreis());
+            }
+        });
+        adapter.notifyDataSetChanged();
     }
 }

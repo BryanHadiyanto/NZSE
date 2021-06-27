@@ -80,7 +80,7 @@ public class BookedAdapter extends RecyclerView.Adapter<BookedAdapter.BookedHold
         holder.image.setImageResource(currentItem.getImage());
         holder.text1.setText(currentItem.getAdress());
         holder.text2.setText(currentItem.getOrt());
-        holder.text3.setText(currentItem.getPreis());
+        holder.text3.setText(currentItem.getPreis() + " €");
     }
 
     @Override

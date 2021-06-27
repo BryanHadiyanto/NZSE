@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,29 +14,36 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.insert_dialogInterface, AngebotLoschen.delete_dialogInterface{
-    private EditText etSearch;
+    private EditText etSearch1;
+    private Button bsortAdr1,bsortPreis1;
     private TextView tvSwitch;
     private Toolbar toolbar1;
     private RecyclerView rvAngebot;
+    private FloatingActionButton fabInsrt;
     AngebotAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     AngebotItem angebotItem = new AngebotItem();
-    ArrayList<AngebotItem> angebotItemArrayList = angebotItem.angebotlist;
+    ArrayList<AngebotItem> angebotItemArrayList = angebotItem.getAngebotlist();
     public static int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_makler_menu);
-        angebotItem.Example();
+//        angebotItem.Example();
         //recycelerview
         rvAngebot= findViewById(R.id.rvAngebotlist2);
         rvAngebot.setHasFixedSize(true);
@@ -51,21 +59,14 @@ public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.i
                 dialog.show(getSupportFragmentManager(), "Delete Item");
             }
         });
-
         toolbar1 = findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar1);
-        etSearch= findViewById(R.id.editTextSearch2);
-        etSearch.addTextChangedListener(new TextWatcher() {
+        etSearch1= findViewById(R.id.editTextSearch2);
+        etSearch1.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
             @Override
             public void afterTextChanged(Editable editable) {
                 filter(editable.toString());
@@ -77,6 +78,28 @@ public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.i
             public void onClick(View view) {
                 openKundenMenu();
               }});
+        bsortAdr1 = findViewById(R.id.buttonSortAdr1);
+        bsortAdr1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sortArrayListAdresse();
+            }
+        });
+        bsortPreis1 = findViewById(R.id.buttonSortpreis1);
+        bsortPreis1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sortArrayListPreis();
+            }
+        });
+        fabInsrt = findViewById(R.id.floatingActionButtonInsert);
+        fabInsrt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AngebotHinzufugen dialog = new AngebotHinzufugen();
+                dialog.show(getSupportFragmentManager(), "Insert Item");
+            }
+        });
     }
     public void openKundenMenu() {
         Intent intent = new Intent(this, KundenMenu.class);
@@ -94,17 +117,17 @@ public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.i
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         switch (item.getItemId()){
-            case R.id.iconInsert: {
-                AngebotHinzufugen dialog = new AngebotHinzufugen();
-                dialog.show(getSupportFragmentManager(), "Insert Item");
+            case R.id.icongebuchtlistMakler: {
+                Intent intent = new Intent(this, gebuchteListeMakler.class);
+                startActivity(intent);
             }
         }
         return super.onOptionsItemSelected(item);
     }
-    //fehlt imageview
+
     @Override
-    public void applyTexts(String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer, int position) {
-        angebotItemArrayList.add(position,new AngebotItem(R.drawable.sample1,addresse,ort,platz,preis,kontakname,kontaknummer));
+    public void applyTexts(Bitmap image, String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer, int position) {
+        angebotItemArrayList.add(position,new AngebotItem(image,addresse,ort,platz,preis,kontakname,kontaknummer));
         adapter.notifyItemInserted(position);
     }
 
@@ -121,7 +144,24 @@ public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.i
                 filteredList.add(item);
             }
         }
-
         adapter.filterList(filteredList);
+    }
+    private void sortArrayListAdresse(){
+        Collections.sort(angebotItemArrayList, new Comparator<AngebotItem>() {
+            @Override
+            public int compare(AngebotItem item, AngebotItem t1) {
+                return item.getAdress().compareTo(t1.getAdress());
+            }
+        });
+        adapter.notifyDataSetChanged();
+    }
+    private void sortArrayListPreis(){
+        Collections.sort(angebotItemArrayList, new Comparator<AngebotItem>() {
+            @Override
+            public int compare(AngebotItem item, AngebotItem t1) {
+                return item.getPreis().compareTo(t1.getPreis());
+            }
+        });
+        adapter.notifyDataSetChanged();
     }
 }
