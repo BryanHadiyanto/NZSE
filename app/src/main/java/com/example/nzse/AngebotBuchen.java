@@ -4,6 +4,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +17,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import java.io.ByteArrayOutputStream;
+
 public class AngebotBuchen extends AppCompatDialogFragment {
     buchen_dialogInterface buchen_dialogInterface;
 
     ImageView imageView;
     EditText etAdress,etOrt,etPlatz,etPreis,etKontakname,etKontaknummer, tvID;
-    String sNum,sEt,sGr,sPr,sKontnam,sKontnum;
 //    Button button;
     KundenMenu kundenMenu;
     AngebotItem angebotItem;
@@ -39,13 +43,14 @@ public class AngebotBuchen extends AppCompatDialogFragment {
                 }).setPositiveButton("Buchen", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
+                Bitmap image = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
                 String addresse = etAdress.getText().toString();
                 String ort = etOrt.getText().toString();
                 String platz = etPlatz.getText().toString();
                 String preis = etPreis.getText().toString();
                 String kontakname = etKontakname.getText().toString();
                 String kontaknummer = etKontaknummer.getText().toString();
-                buchen_dialogInterface.applyTexts(addresse, ort, platz, preis, kontakname, kontaknummer, 0);
+                buchen_dialogInterface.applyTexts(image,addresse, ort, platz, preis, kontakname, kontaknummer, 0);
             }
         });
 
@@ -58,8 +63,8 @@ public class AngebotBuchen extends AppCompatDialogFragment {
         etKontaknummer = view.findViewById(R.id.EditTextKontaktPhone);
         tvID = view.findViewById(R.id.EditTextID);
 
-        tvID.setText(Integer.toString(angebotItem.angebotlist.get(kundenMenu.count).getId()));
-        imageView.setImageResource(angebotItem.angebotlist.get(kundenMenu.count).getImage());
+//        tvID.setText(Integer.toString(angebotItem.angebotlist.get(kundenMenu.count).getId()));
+        imageView.setImageBitmap(angebotItem.angebotlist.get(kundenMenu.count).getBitimage());
         etAdress.setText(angebotItem.angebotlist.get(kundenMenu.count).getAdress());
         etOrt.setText(angebotItem.angebotlist.get(kundenMenu.count).getOrt());
         etPlatz.setText(Integer.toString(angebotItem.angebotlist.get(kundenMenu.count).getPlatz()));
@@ -104,6 +109,6 @@ public class AngebotBuchen extends AppCompatDialogFragment {
         super.onAttach(context);
     }
     public interface buchen_dialogInterface {
-        public void applyTexts( String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer,int position);
+        public void applyTexts(Bitmap image, String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer, int position);
     }
 }

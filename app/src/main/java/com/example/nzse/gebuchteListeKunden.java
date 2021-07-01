@@ -8,11 +8,13 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
-public class gebuchteListeKunden extends AppCompatActivity {
+public class gebuchteListeKunden extends AppCompatActivity implements Angebotabsagen.absagen_dialogInterface {
     private RecyclerView rvAngebot1;
-    private BookedAdapter adapter1;
+    private BookedAdapterKunden adapter1;
     private RecyclerView.LayoutManager layoutManager1;
-    ArrayList<BookedItem> bookedItemArrayList = BookedItem.bookedlist;
+    BookedItem bookedItem = new BookedItem();
+    ArrayList<BookedItem> bookedItemArrayList = bookedItem.getBookedlist();
+    public static int count;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,13 +23,17 @@ public class gebuchteListeKunden extends AppCompatActivity {
         rvAngebot1 = findViewById(R.id.rvAngebotlist1);
         rvAngebot1.setHasFixedSize(true);
         layoutManager1 = new LinearLayoutManager(this);
-        adapter1 = new BookedAdapter(bookedItemArrayList);
+        adapter1 = new BookedAdapterKunden(bookedItemArrayList);
         rvAngebot1.setLayoutManager(layoutManager1);
         rvAngebot1.setAdapter(adapter1);
-        adapter1.setonClickListener(new BookedAdapter.OnItemClickListener() {
+        adapter1.setonClickListener(new BookedAdapterKunden.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+            System.out.println("count: " + position);
+            count = position;
+            System.out.println("count1: " + position);
+            Angebotabsagen dialog = new Angebotabsagen();
+            dialog.show(getSupportFragmentManager(), "Cancel Booking");
             }
 
             @Override
@@ -37,5 +43,10 @@ public class gebuchteListeKunden extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void removeTexts(int pos) {
+        bookedItemArrayList.remove(pos);
     }
 }

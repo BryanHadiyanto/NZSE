@@ -1,16 +1,17 @@
 package com.example.nzse;
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 
 public class BookedItem {
-    int image;
-    private String url,ort,adress,kontaktname,kontaktnummer,platz,preis;
-    //private  int etage,preis;
+    private Bitmap bitmap;
+    private String ort,adress,kontaktname,kontaktnummer,platz,preis;
     public static ArrayList<BookedItem> bookedlist = new ArrayList<>();
     BookedItem(){};
 
-    BookedItem(int image,String adress, String ort, String platz, String preis, String kontaktname, String kontaknummer){
-        this.image = image;
+    BookedItem(Bitmap bitmap,String adress, String ort, String platz, String preis, String kontaktname, String kontaknummer){
+        this.bitmap = bitmap;
         this.adress = adress;
         this.ort = ort;
         this.platz = platz;
@@ -18,8 +19,7 @@ public class BookedItem {
         this.kontaktname = kontaktname;
         this.kontaktnummer = kontaknummer;
     }
-    public int getImage(){ return image; }
-    //    public String getUrl(){ return url};
+    public Bitmap getBitmap(){ return bitmap; }
     public String getAdress(){
         return adress;
     }
@@ -37,5 +37,11 @@ public class BookedItem {
     }
     public String getPreis(){
         return preis;
+    }
+    public void setAngebotlist(ArrayList<BookedItem> bookedlist) {
+        this.bookedlist = bookedlist;
+    }
+    public ArrayList<BookedItem> getBookedlist() {
+        return bookedlist;
     }
 }

@@ -108,17 +108,6 @@ public class AngebotHinzufugen extends AppCompatDialogFragment{
         startActivityForResult(intent, IMAGE_PICK_CODE);
     }
 
-//    @Override
-//    public void onRequestPermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
-//        switch (requestCode){
-//            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-//                pickImageFromGallery();
-//            }
-//            else{
-//                Toast.makeText(this,"Permission denied" , Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
        super.onActivityResult(requestCode, resultCode, data);

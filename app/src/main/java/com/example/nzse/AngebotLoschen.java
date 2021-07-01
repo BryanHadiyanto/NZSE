@@ -91,7 +91,7 @@ public class AngebotLoschen extends AppCompatDialogFragment {
         etKontakNummer= view.findViewById(R.id.editTextKontaktPhone1);
 
 //        tvID.setText(Integer.toString(kundenMenu.angebotItemArrayList.get(kundenMenu.count).getId()));
-        imageView1.setImageResource(angebotItem.angebotlist.get(maklerMenu.count).getImage());
+        imageView1.setImageBitmap(angebotItem.angebotlist.get(maklerMenu.count).getBitimage());
         etAdress.setText(angebotItem.angebotlist.get(maklerMenu.count).getAdress());
         etOrt.setText(angebotItem.angebotlist.get(maklerMenu.count).getOrt());
         etPlatz.setText(Integer.toString(angebotItem.angebotlist.get(maklerMenu.count).getPlatz()));

@@ -35,7 +35,7 @@
             android:layout_toRightOf="@+id/imageView"
             android:text="Adresse"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
@@ -50,7 +50,7 @@
             android:layout_toRightOf="@+id/imageView"
             android:text="Ort"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tvPreis"
@@ -64,7 +64,7 @@
             android:layout_marginRight="44dp"
             android:text="Preis"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvPlatz"
@@ -78,7 +78,7 @@
             android:layout_marginRight="29dp"
             android:text="Frei Platz"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="12sp" />
     </RelativeLayout>
 
 

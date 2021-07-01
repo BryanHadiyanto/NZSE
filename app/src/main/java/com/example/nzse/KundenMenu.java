@@ -1,6 +1,7 @@
 package com.example.nzse;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -40,7 +41,6 @@ public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buche
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kunden_menu);
-        //angebotItem.Example();
         //recyclerview
         rvAngebot = findViewById(R.id.rvAngebotlist);
         rvAngebot.setHasFixedSize(true);
@@ -122,8 +122,8 @@ public class KundenMenu extends AppCompatActivity implements AngebotBuchen.buche
     }
 
     @Override
-    public void applyTexts(String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer, int position) {
-        bookedItemArrayList.add(position,new BookedItem(R.drawable.sample1,addresse,ort,platz,preis,kontakname,kontaknummer));
+    public void applyTexts(Bitmap image, String addresse, String ort, String platz, String preis, String kontakname, String kontaknummer, int position) {
+        bookedItemArrayList.add(position,new BookedItem(image,addresse,ort,platz,preis,kontakname,kontaknummer));
     }
 
     private void filter(String text){

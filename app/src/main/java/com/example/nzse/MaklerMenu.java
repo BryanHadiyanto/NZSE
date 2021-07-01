@@ -36,7 +36,7 @@ public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.i
     AngebotAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     AngebotItem angebotItem = new AngebotItem();
-    ArrayList<AngebotItem> angebotItemArrayList = angebotItem.getAngebotlist();
+    ArrayList<AngebotItem> angebotItemArrayList = angebotItem.angebotlist;
     public static int count;
 
     @Override
@@ -136,7 +136,7 @@ public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.i
         angebotItemArrayList.remove(position);
         adapter.notifyItemRemoved(position);
     }
-
+    //search function
     private void filter(String text){
         ArrayList<AngebotItem> filteredList = new ArrayList<>();
         for(AngebotItem item : angebotItemArrayList){
@@ -146,6 +146,7 @@ public class MaklerMenu extends AppCompatActivity implements AngebotHinzufugen.i
         }
         adapter.filterList(filteredList);
     }
+    //sort function
     private void sortArrayListAdresse(){
         Collections.sort(angebotItemArrayList, new Comparator<AngebotItem>() {
             @Override

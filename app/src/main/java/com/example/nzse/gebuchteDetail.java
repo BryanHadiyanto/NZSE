@@ -15,30 +15,27 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-public class Angebotabsagen extends AppCompatDialogFragment {
-    absagen_dialogInterface absagen_dialogInterface;
+public class gebuchteDetail extends AppCompatDialogFragment {
+    detail_dialogInterface detail_dialogInterface;
     ImageView imageView;
     EditText etAdress,etOrt,etPlatz,etPreis,etKontakname,etKontaknummer, tvID;
-
-    gebuchteListeKunden gebuchtelisteKunden;
+    gebuchteListeMakler gebuchteListeMakler;
     BookedItem bookedItem;
-    @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.activity_angebotabsagen, null);
         builder.setView(view)
-                .setTitle("Cancel Booking")
+                .setTitle("Booking detail")
                 .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogInterface, int which) {
-
                     }
-                }).setPositiveButton("Absagen", new DialogInterface.OnClickListener() {
+                }).setPositiveButton("Stornieren", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
-                int pos = gebuchtelisteKunden.count;
-                absagen_dialogInterface.removeTexts(pos);
+                int pos = gebuchteListeMakler.count;
+                detail_dialogInterface.removeTexts(pos);
             }
         });
 
@@ -52,13 +49,13 @@ public class Angebotabsagen extends AppCompatDialogFragment {
 
         //tvID = view.findViewById(R.id.EditTextID);
         //tvID.setText(Integer.toString(angebotItem.angebotlist.get(kundenMenu.count).getId()));
-        imageView.setImageBitmap(bookedItem.bookedlist.get(gebuchtelisteKunden.count).getBitmap());
-        etAdress.setText(bookedItem.bookedlist.get(gebuchtelisteKunden.count).getAdress());
-        etOrt.setText(bookedItem.bookedlist.get(gebuchtelisteKunden.count).getOrt());
-        etPlatz.setText(bookedItem.bookedlist.get(gebuchtelisteKunden.count).getPlatz());
-        etPreis.setText(bookedItem.bookedlist.get(gebuchtelisteKunden.count).getPreis());
-        etKontakname.setText(bookedItem.bookedlist.get(gebuchtelisteKunden.count).getKontaktname());
-        etKontaknummer.setText(bookedItem.bookedlist.get(gebuchtelisteKunden.count).getKontaktnummer());
+        imageView.setImageBitmap(bookedItem.bookedlist.get(gebuchteListeMakler.count).getBitmap());
+        etAdress.setText(bookedItem.bookedlist.get(gebuchteListeMakler.count).getAdress());
+        etOrt.setText(bookedItem.bookedlist.get(gebuchteListeMakler.count).getOrt());
+        etPlatz.setText(bookedItem.bookedlist.get(gebuchteListeMakler.count).getPlatz());
+        etPreis.setText(bookedItem.bookedlist.get(gebuchteListeMakler.count).getPreis());
+        etKontakname.setText(bookedItem.bookedlist.get(gebuchteListeMakler.count).getKontaktname());
+        etKontaknummer.setText(bookedItem.bookedlist.get(gebuchteListeMakler.count).getKontaktnummer());
 
         //tvID.setEnabled(false);
         etAdress.setEnabled(false);
@@ -72,10 +69,10 @@ public class Angebotabsagen extends AppCompatDialogFragment {
     }
     @Override
     public void onAttach(@NonNull Context context){
-        absagen_dialogInterface = (absagen_dialogInterface) context;
+        detail_dialogInterface = (detail_dialogInterface) context;
         super.onAttach(context);
     }
-    public interface absagen_dialogInterface {
+    public interface detail_dialogInterface {
         public void removeTexts(int pos);
     }
 }

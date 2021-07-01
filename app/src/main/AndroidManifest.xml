@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NZSE">
-        <activity android:name=".gebuchteListeMakler"></activity>
+        <activity android:name=".gebuchteDetail"></activity>
+        <activity android:name=".gebuchteListeMakler" />
         <activity android:name=".Angebotabsagen" />
         <activity android:name=".gebuchteListeKunden" />
         <activity android:name=".MaklerMenu">

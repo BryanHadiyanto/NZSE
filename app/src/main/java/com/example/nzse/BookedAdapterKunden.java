@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class BookedAdapter extends RecyclerView.Adapter<BookedAdapter.BookedHolder> {
+public class BookedAdapterKunden extends RecyclerView.Adapter<BookedAdapterKunden.BookedHolder> {
     private ArrayList<BookedItem> bookedlist;
-    private BookedAdapter.OnItemClickListener listener;
+    private BookedAdapterKunden.OnItemClickListener listener;
 
     public interface  OnItemClickListener{
         void onItemClick(int position);
         void onDeleteClick(int position);
     }
 
-    public void setonClickListener(BookedAdapter.OnItemClickListener listener){
+    public void setonClickListener(BookedAdapterKunden.OnItemClickListener listener){
         this.listener = listener;
     }
 
@@ -31,7 +31,7 @@ public class BookedAdapter extends RecyclerView.Adapter<BookedAdapter.BookedHold
         public TextView text3;
         public ImageView deleteImage;
 
-        public BookedHolder(View itemView, final BookedAdapter.OnItemClickListener listener) {
+        public BookedHolder(View itemView, final BookedAdapterKunden.OnItemClickListener listener) {
             super(itemView);
             image = itemView.findViewById(R.id.imageView1);
             text1 = itemView.findViewById(R.id.tvAdresse1);
@@ -63,7 +63,7 @@ public class BookedAdapter extends RecyclerView.Adapter<BookedAdapter.BookedHold
             });
         }
     }
-    public BookedAdapter(ArrayList<BookedItem>bookedlist){
+    public BookedAdapterKunden(ArrayList<BookedItem>bookedlist){
         this.bookedlist = bookedlist;
     }
     @Override
@@ -77,7 +77,7 @@ public class BookedAdapter extends RecyclerView.Adapter<BookedAdapter.BookedHold
     public void onBindViewHolder(@NonNull BookedHolder holder, int position) {
         BookedItem currentItem = bookedlist.get(position);
 
-        holder.image.setImageResource(currentItem.getImage());
+        holder.image.setImageBitmap(currentItem.getBitmap());
         holder.text1.setText(currentItem.getAdress());
         holder.text2.setText(currentItem.getOrt());
         holder.text3.setText(currentItem.getPreis() + " €");
