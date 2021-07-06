@@ -27,6 +27,18 @@ public class AngebotItem{
         this.kontaktname = kontaktname;
         this.kontaktnummer = kontaknummer;
     }
+    //Ohne Image
+    AngebotItem(String adress, String ort, String anzahlplaetze, String preis, String kontaktname, String kontaknummer){
+        this.x++;
+        id = x;
+        this.adress = adress;
+        this.ort = ort;
+        this.anzahlplaetze = Integer.parseInt(anzahlplaetze);
+        this.preis = preis;
+        this.kontaktname = kontaktname;
+        this.kontaktnummer = kontaknummer;
+    }
+
     public void setPlatz() {
         if(anzahlplaetze != 0)
             this.anzahlplaetze--;

@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -34,15 +35,21 @@ import androidx.core.content.PermissionChecker;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import static android.app.Activity.RESULT_OK;
+
 public class AngebotHinzufugen extends AppCompatDialogFragment{
     insert_dialogInterface insert_dialogInterface;
 
     ImageView ivAngebot;
     EditText etAdress,etOrt,etPlatz,etPreis,etKontakName,etKontakNummer;
-
-    private static final int IMAGE_PICK_CODE = 1000;
+    private Button mButtonBildeinfuegen;
+  /*  private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
-    Bitmap bitmap;
+    Bitmap bitmap;*/
+    private Bitmap imageUri = null;
+    public static final int CAMERA_PERM_CODE = 101;
+    public static final int CAMERA_REQUEST_CODE = 102;
+    private static final int PICK_IMAGE = 100;
 
     @NonNull
     @Override
@@ -61,46 +68,57 @@ public class AngebotHinzufugen extends AppCompatDialogFragment{
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                Bitmap bmp = bitmap;
-                bmp.compress(Bitmap.CompressFormat.PNG,100,stream);
+               // Bitmap bmp = bitmap;
+              //  bmp.compress(Bitmap.CompressFormat.PNG,100,stream);
                 byte[] byteArray = stream.toByteArray();
-                Bitmap image = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
+               // Bitmap image = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
                 String addresse = etAdress.getText().toString();
                 String ort = etOrt.getText().toString();
                 String platz = etPlatz.getText().toString();
                 String preis = etPreis.getText().toString();
                 String kontakname = etKontakName.getText().toString();
                 String kontaknummer = etKontakNummer.getText().toString();
-                insert_dialogInterface.applyTexts(image,addresse,ort,platz,preis,kontakname,kontaknummer,0);
+                insert_dialogInterface.applyTexts(imageUri,addresse,ort,platz,preis,kontakname,kontaknummer,0);
             }
         });
-        ivAngebot= view.findViewById(R.id.imageViewAngebot);
+        mButtonBildeinfuegen = view.findViewById(R.id.mButtonBildeinfuegen);
+        mButtonBildeinfuegen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //askPermissionsCamera();
+                selectImage();
+            }
+        });
+
+        ivAngebot = view.findViewById(R.id.imageViewAngebot);
         ivAngebot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                     if (ActivityCompat.checkSelfPermission(getActivity(),Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
                         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
-                        requestPermissions(permissions, PERMISSION_CODE);
+                      //  requestPermissions(permissions, PERMISSION_CODE);
                     }
                     else{
-                        pickImageFromGallery();
+                       // pickImageFromGallery();
                     }
                 }
                 else{
-                    pickImageFromGallery();
+                   // pickImageFromGallery();
                 }
             }
         });
+
         etAdress= view.findViewById(R.id.editTextAdresse);
         etOrt= view.findViewById(R.id.editTextOrt);
         etPlatz= view.findViewById(R.id.editTextPlatz);
         etPreis= view.findViewById(R.id.editTextPreis);
         etKontakName= view.findViewById(R.id.editTextTextKontakName);
         etKontakNummer= view.findViewById(R.id.editTextKontaktPhone);
+
         return builder.create();
     }
-
+/*
     private void pickImageFromGallery(){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
@@ -134,7 +152,86 @@ public class AngebotHinzufugen extends AppCompatDialogFragment{
 
         return photo;
     }
+*/
+private void selectImage() {
+    final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
+     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+    builder.setTitle("Add Photo!");
+    builder.setItems(options, new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int item) {
+            if (options[item].equals("Take Photo"))
+            {
+                //askPermissionsCamera();
+                askPermissionsCamera();
+            }
+            else if (options[item].equals("Choose from Gallery"))
+            {
+                openGallery();
+            }
+            else if (options[item].equals("Cancel")) {
+                dialog.dismiss();
+            }
+        }
+    });
+    builder.show();
+}
 
+    private void askPermissionsCamera() {
+        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.CAMERA
+            },CAMERA_PERM_CODE);
+        }else {
+            openCamera();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        // super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == CAMERA_PERM_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera();
+            } else {
+                Toast.makeText(getActivity(),"Camera Permission is Required to use camera",Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void openCamera() {
+        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(camera,CAMERA_REQUEST_CODE);
+        // Toast.makeText(getApplication(),"open camera is clicked",Toast.LENGTH_SHORT).show();
+    }
+
+    private void openGallery() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //take a photo from the camera
+        if (resultCode == RESULT_OK && requestCode == CAMERA_REQUEST_CODE) {
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            //mImageView.setImageBitmap(bitmap);
+            imageUri = bitmap;
+            //mImageView.setImageURI(data.getData());
+        }
+
+        //take a photo from the gallery
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+            // mImageView.setImageURI(data.getData());
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                imageUri = bitmap;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     @Override
     public void onAttach(@NonNull Context context){
         insert_dialogInterface = (insert_dialogInterface) context;
